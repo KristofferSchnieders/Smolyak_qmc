@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Proof_of_principle.html">Proof of principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Approxim_pi.html">Approximate <span class="math notranslate nohighlight">\(\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stat_evaluation_for_prob_quad%20.html">Statistical evaluation for error for probabilistic quadratures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Periodic_function.html">Example 15.2.6: Periodic Functions (modified)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pertubated_Coulomb_Potential.html">Example 18.3.8 Pertubated Coulomb Potential (PCP)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="View.html">View</a></li>
 </ul>
@@ -441,21 +442,21 @@ div.rendered_html tbody tr:hover {
 <p>Further more, there are two options, how many points are used for the probabilistic quadratures. (one or three points)</p>
 <p>These options are compared afterwards.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Methodes.Smolyak_one</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="One-point-for-q-=-1">
 <h2>One point for q = 1<a class="headerlink" href="#One-point-for-q-=-1" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -551,16 +552,16 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Three-points-for-q-=-1">
 <h2>Three points for q = 1<a class="headerlink" href="#Three-points-for-q-=-1" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_three_points</span> <span class="kn">import</span> <span class="o">*</span>
+<span></span><span class="kn">from</span> <span class="nn">Methodes.Smolyak_three</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

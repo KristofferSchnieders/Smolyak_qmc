@@ -90,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Proof_of_principle.html">Proof of principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Approxim_pi.html">Approximate <span class="math notranslate nohighlight">\(\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stat_evaluation_for_prob_quad%20.html">Statistical evaluation for error for probabilistic quadratures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Periodic_function.html">Example 15.2.6: Periodic Functions (modified)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pertubated_Coulomb_Potential.html">Example 18.3.8 Pertubated Coulomb Potential (PCP)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">View</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Overview-over-methods-defined-for-project">Overview over methods defined for project</a></li>
@@ -441,7 +442,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>exist. An other way is calling the View function.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -451,148 +452,21 @@ div.rendered_html tbody tr:hover {
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="k">as</span> <span class="nn">Studieproject_one</span>
+<span class="kn">import</span> <span class="nn">Methodes.Smolyak_one</span> <span class="k">as</span> <span class="nn">Smolyak_one</span>
 </pre></div>
 </div>
 </div>
+<p>With this code the view of the project can be called. The view can be used by following these steps.</p>
+<p>1.) Write a function that should be approximated (text box in the top).</p>
+<p>2.) Wrint the variables of the function to prevent confusion (text box below the first text box)</p>
+<p>3.) Choose a degree of application. (text box in the lower middle)</p>
+<p>4.) Choose quadrature. (dropdown menu on the lower right side)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span> <span class="k">as</span> <span class="n">mbox</span>
-<span class="c1"># View/ Main</span>
-
-<span class="c1"># In this script we make an interface with tkinter</span>
-<span class="c1">#   The interface has: - An entry line for the function</span>
-<span class="c1">#                      - An entry line for the variables</span>
-<span class="c1">#                      - number of evaluations</span>
-<span class="c1">#                      - Perhaps an entry line to verify dimension</span>
-<span class="c1">#                      - button to start calculation</span>
-<span class="c1">#                      - A separate popup for result showing of</span>
-<span class="c1">#                      - Drop down menu for choosing of quadrature</span>
-<span class="c1">#                      - Several popup for warnings</span>
-<span class="c1"># import tkinter as tk</span>
-
-<span class="c1"># own files imported</span>
-<span class="c1"># import My_Controller as cont</span>
-<span class="c1"># import controller_smolyak as cont</span>
-
-<span class="c1"># create main viewer</span>
-<span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
-<span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Application for calculation of integral with Smolak algorithm&quot;</span><span class="p">)</span>
-<span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;800x300&quot;</span><span class="p">)</span>
-
-<span class="c1"># Label for description of functionality of viewer</span>
-<span class="n">description</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;To  use the application you need first need to enter a function in the &quot;</span>
-                                  <span class="s2">&quot;entry.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                                  <span class="s2">&quot;After this the tuple of variables and in the end the quadrature you want to be &quot;</span>
-                                  <span class="s2">&quot;used.</span><span class="se">\n</span><span class="s2">&quot;</span>
-                                  <span class="s2">&quot;The calculation starts after clicking start.&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
-<span class="n">description</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1">#</span>
-<span class="c1"># Column for entry of function</span>
-<span class="n">func_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Please enter function: &quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">func_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
-
-<span class="n">func_entry</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">func_entry</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">func_entry</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;2 x y&quot;</span><span class="p">)</span>
-
-<span class="c1"># Column for entry of variables</span>
-<span class="n">var_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Please enter variables: &quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">var_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
-
-<span class="n">var_entry</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">var_entry</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">var_entry</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;(x , y)&quot;</span><span class="p">)</span>
-
-<span class="c1"># Drop down menu for quadrature</span>
-
-<span class="c1"># list of quadratures available</span>
-<span class="n">option_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Newton-Cotes&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;Trapezoidal&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;Monte Carlo (nested)&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;Monte Carlo (non-nested)&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;Quasi-Monte Carlo&quot;</span><span class="p">]</span>
-<span class="n">option</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
-<span class="n">option</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">option_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">which_quad</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">OptionMenu</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="o">*</span><span class="n">option_list</span><span class="p">)</span>
-<span class="n">which_quad</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-
-<span class="n">degree_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Please choose degree of approximation: &quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
-                        <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">degree_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
-
-<span class="n">degree_of_approx</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">degree_of_approx</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">degree_of_approx</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># !! Here we also could  think about a button making it possible to define the epsilon-error!!</span>
-
-
-<span class="c1"># Start button</span>
-<span class="k">def</span> <span class="nf">start</span><span class="p">():</span>
-
-    <span class="c1"># read out entries</span>
-    <span class="n">function_string</span> <span class="o">=</span> <span class="n">func_entry</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="n">variables_string</span> <span class="o">=</span> <span class="n">var_entry</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="n">quadrature</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="n">degree</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree_of_approx</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
-
-    <span class="c1"># We want to open an error box, if the degree of approximation is not big enough. Hence, we need to</span>
-    <span class="c1"># know the dimension of the function. Here we get this by counting the commas.</span>
-    <span class="k">if</span> <span class="n">degree</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">variables_string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">mbox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Input error&quot;</span><span class="p">,</span> <span class="s2">&quot;The degree of the approximation needs to be at least as high as the &quot;</span>
-                                      <span class="s2">&quot;dimension of m the function. </span><span class="se">\n\n</span><span class="s2">In this case this would be q = &quot;</span>
-                                      <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">variables_string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
-
-
-    <span class="k">else</span><span class="p">:</span>
-
-        <span class="c1"># ask controller for benchmarks of approximation</span>
-        <span class="n">result_approx</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">Studieproject</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">function_string</span><span class="p">,</span>
-                                                                      <span class="n">variables_string</span><span class="p">,</span> <span class="n">quadrature</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
-
-        <span class="c1"># Create new window where results are shown</span>
-        <span class="n">result_window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-        <span class="n">result_window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Result&quot;</span><span class="p">)</span>
-        <span class="n">result_window</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;800x200&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Label for result of approx.</span>
-        <span class="n">result_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">result_window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;The result of the approximation is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">result_approx</span><span class="p">),</span>
-                                <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">result_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="c1"># Label for error</span>
-        <span class="n">error_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">result_window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Estimated error: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
-                               <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">error_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="c1"># Label for cost estimation</span>
-        <span class="n">cost_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">result_window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Estimated number of evaluations: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cost</span><span class="p">),</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-                              <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">cost_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="c1"># Quit button of result window</span>
-        <span class="n">quit_button_result</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">result_window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Quit&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                       <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">quit_button_result</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-
-<span class="c1">#  Start button</span>
-<span class="n">start_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="n">start_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Quit button</span>
-<span class="n">quit_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Quit&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">quit_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
-
+<span></span><span class="n">Smolyak_one</span><span class="o">.</span><span class="n">View</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -600,12 +474,12 @@ div.rendered_html tbody tr:hover {
 <h2>Overview over methods defined for project<a class="headerlink" href="#Overview-over-methods-defined-for-project" title="Permalink to this headline">¶</a></h2>
 <p>Furthermore, an overview should be given over the methods defined in the project. These methods are written in alphabetic order.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">write_functions</span><span class="p">():</span>
-    <span class="n">functions</span><span class="o">=</span> <span class="p">[</span><span class="n">function</span> <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span>  <span class="nb">dir</span><span class="p">(</span><span class="n">Studieproject_one</span><span class="p">)</span> <span class="k">if</span>
+    <span class="n">functions</span><span class="o">=</span> <span class="p">[</span><span class="n">function</span> <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span>  <span class="nb">dir</span><span class="p">(</span><span class="n">Smolyak_one</span><span class="p">)</span> <span class="k">if</span>
                 <span class="p">((</span><span class="ow">not</span> <span class="n">function</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">function</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">function</span> <span class="o">!=</span> <span class="s2">&quot;parse_expr&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">function</span> <span class="o">==</span> <span class="s1">&#39;smolyak&#39;</span><span class="p">)]</span>
     <span class="k">for</span> <span class="n">k_1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">functions</span><span class="p">)):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1m&#39;</span><span class="o">+</span><span class="n">functions</span><span class="p">[</span><span class="n">k_1</span><span class="p">])</span>
@@ -630,6 +504,8 @@ div.rendered_html tbody tr:hover {
 </span><span class="ansi-bold">epsilon_cost
 
 </span><span class="ansi-bold">error_smolyak
+
+</span><span class="ansi-bold">fast_eps_cost
 
 </span><span class="ansi-bold">find_all_sensible_combinations
 
@@ -669,6 +545,15 @@ div.rendered_html tbody tr:hover {
 
 </span>
 </pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

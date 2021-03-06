@@ -19,9 +19,12 @@ Welcome to Studienprojekt's documentation!
    examples/View.ipynb
 
 
-Indices and tables
+Documentation
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. automodule:: Studienprojekt_Smolyak_qmc_one_point
+      :members:
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

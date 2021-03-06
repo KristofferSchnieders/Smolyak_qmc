@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Example 18.3.8 Pertubated Coulomb Potential (PCP)" href="Pertubated_Coulomb_Potential.html" />
+    <link rel="next" title="Example 15.2.6: Periodic Functions (modified)" href="Periodic_function.html" />
     <link rel="prev" title="Approximate \(\pi\)" href="Approxim_pi.html" /> 
 </head>
 
@@ -102,6 +102,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Periodic_function.html">Example 15.2.6: Periodic Functions (modified)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pertubated_Coulomb_Potential.html">Example 18.3.8 Pertubated Coulomb Potential (PCP)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="View.html">View</a></li>
 </ul>
@@ -443,7 +444,7 @@ div.rendered_html tbody tr:hover {
 <h1>Statistical evaluation for error for probabilistic quadratures<a class="headerlink" href="#Statistical-evaluation-for-error-for-probabilistic-quadratures" title="Permalink to this headline">¶</a></h1>
 <p>In this script we want to evaluate statistical data. For this we load data, which was calculated and saved in a .cvs/ .pkt file, because generating file takes some hours.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -451,7 +452,7 @@ div.rendered_html tbody tr:hover {
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Methodes.Smolyak_one</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -470,8 +471,8 @@ div.rendered_html tbody tr:hover {
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="k">pass</span>
-<span class="n">results_one</span> <span class="o">=</span> <span class="n">load_stat_data</span><span class="p">(</span><span class="s2">&quot;stat_approach_2_to_20_result_13_11_one.csv&quot;</span><span class="p">)</span>
-<span class="n">results_three</span> <span class="o">=</span> <span class="n">load_stat_data</span><span class="p">(</span><span class="s2">&quot;stat_approach_2_to_20_result_13_11_three.csv&quot;</span><span class="p">)</span>
+<span class="n">results_one</span> <span class="o">=</span> <span class="n">load_stat_data</span><span class="p">(</span><span class="s2">&quot;stat_approach_2_to_20_result_6_1_one.csv&quot;</span><span class="p">)</span>
+<span class="n">results_three</span> <span class="o">=</span> <span class="n">load_stat_data</span><span class="p">(</span><span class="s2">&quot;stat_approach_2_to_20_result_6_1_three.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -781,7 +782,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>The dotted lines are the error estimations for the different quadratures. The upper one is related to the calculations using one point for q_i = 1. The lower lines show the error within a confidence level of 95 %.”. The real error bound nearly decreases proportional to 2 ** (-1), if the Quasi-Monte Carlo quadrature is used. The exponent is varying a little with respect to the generated data used.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -866,23 +867,22 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Code-used-for-generation-of-evaluated-data.">
 <h3>Code used for generation of evaluated data.<a class="headerlink" href="#Code-used-for-generation-of-evaluated-data." title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">import Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point as Studieproject_one</span>
+<span class="sd">import os</span>
+<span class="sd">#os.chdir(&quot;..&quot;)</span>
+<span class="sd">import Methodes.Smolyak_one as Smolyak_one</span>
 
-<span class="sd">Studieproject_one.calculate_stat_data(&quot;pi^2/4 sin(pi*x)sin(pi*y)&quot;, &quot;(x,y)&quot;, [&quot;Monte Carlo (nested)&quot;,&quot;Monte Carlo (non-nested)&quot;,&quot;Quasi-Monte Carlo&quot;]</span>
-<span class="sd">   , &quot;stat_approach_2_to_20_result_1_12_one.csv&quot;,</span>
+<span class="sd">Smolyak_one.calculate_stat_data(&quot;pi^2/4 sin(pi*x)sin(pi*y)&quot;, &quot;(x,y)&quot;, [&quot;Monte Carlo (nested)&quot;,&quot;Monte Carlo (non-nested)&quot;,&quot;Quasi-Monte Carlo&quot;]</span>
+<span class="sd">   , &quot;stat_approach_2_to_20_result_6_1_one.csv&quot;,</span>
 <span class="sd">                                      [2, 25], repetitions=2 ** 10, damping=True, damping_exp=1.2)</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">import Methodes.Smolyak_three as Smolyak_three</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">import Methodes_Studienproject.Studienprojekt_Smolyak_qmc_three_points as Studieproject_three</span>
-
-<span class="sd">Studieproject_three.calculate_stat_data(&quot;pi^2/4 sin(pi*x)sin(pi*y)&quot;, &quot;(x,y)&quot;, [&quot;Monte Carlo (nested)&quot;, &quot;Monte Carlo (non-nested)&quot;,&quot;Quasi-Monte Carlo&quot;]</span>
-<span class="sd">    , &quot;stat_approach_2_to_20_result_1_12_three.csv&quot;, [2, 23], repetitions=2 ** 10, damping=True,</span>
+<span class="sd">Smolyak_three.calculate_stat_data(&quot;pi^2/4 sin(pi*x)sin(pi*y)&quot;, &quot;(x,y)&quot;, [&quot;Monte Carlo (nested)&quot;, &quot;Monte Carlo (non-nested)&quot;,&quot;Quasi-Monte Carlo&quot;]</span>
+<span class="sd">    , &quot;stat_approach_2_to_20_result_6_1_three.csv&quot;, [2, 25], repetitions=2 ** 10, damping=True,</span>
 <span class="sd">                        damping_exp=1.2)</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approximation of analytical function in 2 dimensions. (Three points)&quot;</span><span class="p">)</span>
@@ -918,7 +918,7 @@ Approximation of analytical function in 2 dimensions. (Three points)
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Pertubated_Coulomb_Potential.html" class="btn btn-neutral float-right" title="Example 18.3.8 Pertubated Coulomb Potential (PCP)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Periodic_function.html" class="btn btn-neutral float-right" title="Example 15.2.6: Periodic Functions (modified)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Approxim_pi.html" class="btn btn-neutral float-left" title="Approximate \(\pi\)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

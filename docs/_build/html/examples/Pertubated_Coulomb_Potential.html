@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Example 15.3.8 Pertubated Coulomb Potential (PCP) &mdash; Studienprojekt  documentation</title>
+  <title>Example 18.3.8 Pertubated Coulomb Potential (PCP) &mdash; Studienprojekt  documentation</title>
   
 
   
@@ -92,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Approxim_pi.html">Approximate <span class="math notranslate nohighlight">\(\pi\)</span></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Stat_evaluation_for_prob_quad%20.html">Statistical evaluation for error for probabilistic quadratures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Periodic_function.html">Example 15.2.6: Periodic Functions (modified)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Example 15.3.8 Pertubated Coulomb Potential (PCP)</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example 18.3.8 Pertubated Coulomb Potential (PCP)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Results-of-approximations">Results of approximations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Error-estimation">Error estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Algorithm-used-for-calculation-of-data">Algorithm used for calculation of data</a></li>
@@ -145,7 +145,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Example 15.3.8 Pertubated Coulomb Potential (PCP)</li>
+      <li>Example 18.3.8 Pertubated Coulomb Potential (PCP)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -434,9 +434,9 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Example-15.3.8-Pertubated-Coulomb-Potential-(PCP)">
-<h1>Example 15.3.8 Pertubated Coulomb Potential (PCP)<a class="headerlink" href="#Example-15.3.8-Pertubated-Coulomb-Potential-(PCP)" title="Permalink to this headline">¶</a></h1>
-<p>We want to implement the example 15.3.8 in the book Tractability of Multivariate Problems Vol 2 for 2 particles The function itself is</p>
+<div class="section" id="Example-18.3.8-Pertubated-Coulomb-Potential-(PCP)">
+<h1>Example 18.3.8 Pertubated Coulomb Potential (PCP)<a class="headerlink" href="#Example-18.3.8-Pertubated-Coulomb-Potential-(PCP)" title="Permalink to this headline">¶</a></h1>
+<p>We want to implement the example 18.3.8 in the book Tractability of Multivariate Problems Vol 2 for 2 particles The function itself is</p>
 <div class="math notranslate nohighlight">
 \[f(x_1,x_2,\dots,x_l) = \sum_{1\leq i &lt; j \leq l}\left(\frac{1}{\sqrt{||x_i-x_j||^{2}_{2}+\alpha}}\right)\]</div>
 <p>Where x_i, i = 1,2,…,l are three dimensional vectors. We first choose l = 2. Using the results of the example we calculate the function by integrating</p>
@@ -444,7 +444,7 @@ div.rendered_html tbody tr:hover {
 \[\tilde{f}_{\alpha}(z_1, z_2, \dots, z_{3l})=\left(\prod^{6-1}_{j = 1}\left(j+\frac{1}{2}\right)\right) \cdot \frac{(z_1-z_4)^4(z_2-z_5)^4(z_3-z_6)^4}{((z_1-z_4)^2+(z_2-z_5)^2+(z_3-z_6)^2+\alpha)^{13}}\]</div>
 <p>over the interval [0,1]⁶. For higher dimension the algorithm gets extremely slow.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -458,8 +458,8 @@ div.rendered_html tbody tr:hover {
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="k">as</span> <span class="nn">Studieproject_one</span>
-<span class="kn">import</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_three_points</span> <span class="k">as</span> <span class="nn">Studienprojekt_three</span>
+<span class="kn">import</span> <span class="nn">Methodes.Smolyak_one</span> <span class="k">as</span> <span class="nn">Smolyak_one</span>
+<span class="kn">import</span> <span class="nn">Methodes.Smolyak_three</span> <span class="k">as</span> <span class="nn">Smolyak_three</span>
 
 </pre></div>
 </div>
@@ -469,7 +469,7 @@ div.rendered_html tbody tr:hover {
 <p>We calculated the integral for <span class="math notranslate nohighlight">\(\alpha = 10^{-i}\)</span> for in <span class="math notranslate nohighlight">\(i = 0, \dots, 5\)</span> using different quadratures up to a degree of approximation of up to 23, depending on the runtime of the algorithm. Furthermore it was possible to calculate the integral for <span class="math notranslate nohighlight">\(i = 0\)</span> and <span class="math notranslate nohighlight">\(i=1\)</span> in an acceptable amount of time and with a sufficient accuracy. On this basis we also show a lower bound of the integral for the smaller <span class="math notranslate nohighlight">\(\alpha\)</span> which was estimated on page 393 of the same book. First
 we show the results of the approximation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -641,7 +641,7 @@ we show the results of the approximation.</p>
 <div class="section" id="Error-estimation">
 <h2>Error estimation<a class="headerlink" href="#Error-estimation" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -698,12 +698,12 @@ we show the results of the approximation.</p>
 <h2>Algorithm used for calculation of data<a class="headerlink" href="#Algorithm-used-for-calculation-of-data" title="Permalink to this headline">¶</a></h2>
 <p>Below you see the algorithm, with which the integral was approximated.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">import Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point as Studieproject_one</span>
+<span class="sd">import Methodes.Smolyak_one as Smolyak_one</span>
 <span class="sd">print(&quot;remove quotes, if you want to generate data.&quot;)</span>
 <span class="sd">alpha = [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]</span>
 <span class="sd">dim = 6</span>
@@ -726,7 +726,7 @@ we show the results of the approximation.</p>
 <span class="sd">    for k_1  in range(len(option_list)):</span>
 <span class="sd">        print(option_list[k_1])</span>
 <span class="sd">        for k_2 in range(degree_of_approx[k_1]):</span>
-<span class="sd">            approx_result[k_2,k_1,:] = Studieproject_one.controller_smolyak(function_string, variables_string, option_list[k_1], k_2 + 6)[0:2]</span>
+<span class="sd">            approx_result[k_2,k_1,:] = Smolyak_one.controller_smolyak(function_string, variables_string, option_list[k_1], k_2 + 6)[0:2]</span>
 <span class="sd">            print(approx_result[k_2,k_1,:])</span>
 <span class="sd">    data = {&quot;Newton-Cotes&quot;: [approx_result[:,0,:]],&quot;Trapezoidal&quot;: [approx_result[:,1,:]], &quot;Monte Carlo (non-nested)&quot;: [approx_result[:,2,:]],&quot;Quasi-Monte Carlo&quot;: [approx_result[:,3,:]]}</span>
 <span class="sd">    data = bearcats.DataFrame(data=data)</span>
@@ -746,7 +746,7 @@ we show the results of the approximation.</p>
 <span class="sd">    prefactor = np.sum(np.array(list(range(1,6)))+0.5)</span>
 <span class="sd">    function_string = str(prefactor) + &quot; * ((z_1 - z_4) ** 4 * (z_2 - z_5) ** 4  * (z_3 - z_6)**4)/(((z_1 - z_4) ** 2 + (z_2 - z_5) ** 2 + (z_3 - z_6) ** 2 + &quot; + str(alpha[k_3])+ &quot;) ** (13))&quot;</span>
 <span class="sd">    variables_string = &quot;(z_1 , z_2 , z_3, z_4 , z_5, z_6)&quot;</span>
-<span class="sd">    f = Studieproject_one.rewrite_function(function_string, variables_string)[0]</span>
+<span class="sd">    f = Smolyak_one.rewrite_function(function_string, variables_string)[0]</span>
 <span class="sd">    borders = [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]]</span>
 <span class="sd">    integral = scipy.integrate.nquad(f, borders, opts = {&quot;epsrel&quot;: 1/alpha[k_3]**2, &quot;epsabs&quot;: 3e4/(alpha[k_3])**2, &quot;limit&quot;: 1 })</span>
 <span class="sd">    print(integral)</span>

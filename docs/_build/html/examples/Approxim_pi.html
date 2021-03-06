@@ -95,6 +95,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Stat_evaluation_for_prob_quad%20.html">Statistical evaluation for error for probabilistic quadratures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Periodic_function.html">Example 15.2.6: Periodic Functions (modified)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pertubated_Coulomb_Potential.html">Example 18.3.8 Pertubated Coulomb Potential (PCP)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="View.html">View</a></li>
 </ul>
@@ -442,7 +443,7 @@ div.rendered_html tbody tr:hover {
 \[\pi = 6 \cdot A(3,q),\]</div>
 <p>with <span class="math notranslate nohighlight">\(A(n,q)\)</span> being the result of the Smolyak algorithm in <span class="math notranslate nohighlight">\(n\)</span> dimensions and the degree of approximation q. Because the function is not derivable, it is not possible to estimate the error for the algorithm for the deterministic quadratures. We will just compare them to the value of <span class="math notranslate nohighlight">\(\pi\)</span> used by numpy.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -450,19 +451,18 @@ div.rendered_html tbody tr:hover {
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
 
 
-<span class="kn">import</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="k">as</span> <span class="nn">Studieproject_one</span>
+<span class="kn">import</span> <span class="nn">Methodes.Smolyak_one</span> <span class="k">as</span> <span class="nn">Smolyak_one</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">itt</span>
-
 </pre></div>
 </div>
 </div>
 <div class="section" id="The-functions-used">
 <h2>The functions used<a class="headerlink" href="#The-functions-used" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -488,17 +488,11 @@ div.rendered_html tbody tr:hover {
                 <span class="k">if</span> <span class="n">x_1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">X_2</span><span class="p">[</span><span class="n">index_mat</span><span class="p">,</span> <span class="n">index_vec</span><span class="p">,</span> <span class="n">index_col</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">X_3</span><span class="p">[</span><span class="n">index_mat</span><span class="p">,</span> <span class="n">index_vec</span><span class="p">,</span> <span class="n">index_col</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">save_mat</span><span class="p">[</span><span class="n">index_mat</span><span class="p">,</span> <span class="n">index_vec</span><span class="p">,</span> <span class="n">index_col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">save_mat</span>
+
 <span class="n">color_str</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;fuchsia&quot;</span><span class="p">,</span> <span class="s2">&quot;navy&quot;</span><span class="p">,</span> <span class="s2">&quot;limegreen&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">]</span>
-<span class="n">variables_string_rewrite</span> <span class="o">=</span> <span class="s2">&quot;(x_1, x_2, x_3)&quot;</span>
-<span class="n">variables_string_rewrite</span> <span class="o">=</span> <span class="n">variables_string_rewrite</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="n">variables</span> <span class="o">=</span> <span class="n">variables_string_rewrite</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;)(&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-<span class="n">variables_string_rewrite</span> <span class="o">=</span> <span class="n">variables_string_rewrite</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;)(&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;There at least has to be one variable.&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)):</span>
-    <span class="n">variables</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;x_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;x_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
 
 <span class="n">option_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Trapezoidal&quot;</span><span class="p">,</span>
                <span class="s2">&quot;Monte Carlo (nested)&quot;</span><span class="p">,</span>
@@ -510,12 +504,12 @@ div.rendered_html tbody tr:hover {
 <span class="n">approx_pi_circle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">option_list</span><span class="p">),</span> <span class="n">upper_bound</span> <span class="o">-</span> <span class="n">lower_bound</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">index_option</span><span class="p">,</span> <span class="n">option</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">option_list</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">index_q</span><span class="p">,</span> <span class="n">degree_of_approx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">)):</span>
-        <span class="n">approx_pi_circle</span><span class="p">[</span><span class="n">index_option</span><span class="p">,</span> <span class="n">index_q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">variables</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">option</span><span class="p">,</span> <span class="n">degree_of_approx</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">approx_pi_circle</span><span class="p">[</span><span class="n">index_option</span><span class="p">,</span> <span class="n">index_q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">variables</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">option</span><span class="p">,</span> <span class="n">degree_of_approx</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">approx_pi_ball</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">option_list</span><span class="p">),</span> <span class="n">upper_bound</span> <span class="o">-</span> <span class="n">lower_bound</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">index_option</span><span class="p">,</span> <span class="n">option</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">option_list</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">index_q</span><span class="p">,</span> <span class="n">degree_of_approx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">)):</span>
-        <span class="n">approx_pi_ball</span><span class="p">[</span><span class="n">index_option</span><span class="p">,</span> <span class="n">index_q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">degree_of_approx</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">approx_pi_ball</span><span class="p">[</span><span class="n">index_option</span><span class="p">,</span> <span class="n">index_q</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">degree_of_approx</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 </pre></div>
 </div>
@@ -524,7 +518,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Illustration-of-the-principle-of-approximation-for-2-dimensions">
 <h2>Illustration of the principle of approximation for 2 dimensions<a class="headerlink" href="#Illustration-of-the-principle-of-approximation-for-2-dimensions" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -543,18 +537,18 @@ div.rendered_html tbody tr:hover {
 
         <span class="c1"># One option for Newton-Cotes and Trapezoidal quadrature, because</span>
         <span class="k">if</span> <span class="n">quadrature</span> <span class="o">==</span> <span class="s2">&quot;Newton-Cotes&quot;</span> <span class="ow">or</span> <span class="n">quadrature</span> <span class="o">==</span> <span class="s2">&quot;Trapezoidal&quot;</span><span class="p">:</span>
-            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">one_dim_trapezoidal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">one_dim_trapezoidal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">quadrature</span> <span class="o">==</span>  <span class="s2">&quot;Monte Carlo (nested)&quot;</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">monte_carlo_quad</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">monte_carlo_quad</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
             <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">list_of_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">])</span>
 
 
         <span class="k">if</span> <span class="n">quadrature</span> <span class="o">==</span>  <span class="s2">&quot;Monte Carlo (non-nested)&quot;</span><span class="ow">or</span> <span class="p">(</span><span class="n">quadrature</span> <span class="o">==</span> <span class="s2">&quot;Monte Carlo (nested)&quot;</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>  <span class="p">:</span>
-            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">monte_carlo_quad</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">monte_carlo_quad</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">quadrature</span> <span class="o">==</span>  <span class="s2">&quot;Quasi-Monte Carlo&quot;</span><span class="p">:</span>
-            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">qmc_quad</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">qmc_quad</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
         <span class="n">list_of_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
@@ -638,7 +632,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>The blue points coincides with the points with value 1 and the red ones with the value 0.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

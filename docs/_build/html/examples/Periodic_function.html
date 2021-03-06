@@ -469,7 +469,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
 
 
-<span class="kn">import</span> <span class="nn">Methodes_Studienproject.Studienprojekt_Smolyak_qmc_one_point</span> <span class="k">as</span> <span class="nn">Studieproject_one</span>
+<span class="kn">import</span> <span class="nn">Methodes.Smolyak_one</span> <span class="k">as</span> <span class="nn">Smolyak_one</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">bearcats</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
@@ -487,7 +487,7 @@ div.rendered_html tbody tr:hover {
 <h2>Example on page 358<a class="headerlink" href="#Example-on-page-358" title="Permalink to this headline">¶</a></h2>
 <p>First we show the calculate the approximation of <span class="math notranslate nohighlight">\(f_1 (x,t)\)</span> and the approximation given on page 358.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -525,10 +525,10 @@ div.rendered_html tbody tr:hover {
 <span class="n">cost_and_err_estim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">eps_ind</span><span class="p">,</span> <span class="n">epsilon</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]):</span>
     <span class="n">m_i</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">cost_and_err_estim</span><span class="p">[</span><span class="n">eps_ind</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">fast_eps_cost</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F_0</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)[</span><span class="mi">0</span><span class="p">::</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">cost_and_err_estim</span><span class="p">[</span><span class="n">eps_ind</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">fast_eps_cost</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F_0</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)[</span><span class="mi">0</span><span class="p">::</span><span class="mi">6</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span> <span class="o">+</span> <span class="n">deg_approx</span><span class="p">):</span>
-    <span class="n">result_max_fun</span><span class="p">[</span><span class="n">q</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Studieproject_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">max_fun</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">example_2</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">result_max_fun</span><span class="p">[</span><span class="n">q</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">controller_smolyak</span><span class="p">(</span><span class="n">max_fun</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">function_given</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">no_error</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">example_2</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="n">result_max_fun</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result_max_fun</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
@@ -536,11 +536,11 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>We here want to show that the function calculating the estimation works properly.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">estim_cost_error</span> <span class="o">=</span><span class="n">Studieproject_one</span><span class="o">.</span><span class="n">fast_eps_cost</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F_0</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+<span></span><span class="n">estim_cost_error</span> <span class="o">=</span> <span class="n">Smolyak_one</span><span class="o">.</span><span class="n">fast_eps_cost</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F_0</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">meaning</span> <span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;cost(A_{\epsilon}(d))&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha_0&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha_1&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha_2&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha_3&quot;</span><span class="p">]</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; $We chose $\epsilon&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;$ = $ \frac</span><span class="si">{1}{8}</span><span class="s2">&quot;</span><span class="p">))</span>
@@ -665,7 +665,7 @@ $\displaystyle \alpha_3$ = $1.5$</div></div>
 $\displaystyle  $This coincides with the values diplayed on the pages 368 and 369. For bigger values of  $ \epsilon, $ the cost-estimation is not a number. In this reagion the estimation will be seen to be bigger than actual values.$ $</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -721,7 +721,7 @@ $\displaystyle  $This coincides with the values diplayed on the pages 368 and 36
 <div class="section" id="Example-2:-Functions-in-f-\in-\tilde{C}^r([0,1])-with-r-&gt;-0-and-higher-dimensions">
 <h2>Example 2: Functions in <span class="math notranslate nohighlight">\(f \in \tilde{C}^r([0,1])\)</span> with <span class="math notranslate nohighlight">\(r &gt; 0\)</span> and higher dimensions<a class="headerlink" href="#Example-2:-Functions-in-f-\in-\tilde{C}^r([0,1])-with-r->-0-and-higher-dimensions" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -775,7 +775,7 @@ $\displaystyle  $This coincides with the values diplayed on the pages 368 and 36
 <span class="sd">        cost_estim = []</span>
 <span class="sd">        epsilons = [(1/2)**(20*l+k_1) for k_1 in range(error.shape[0])]</span>
 <span class="sd">        for eps in epsilons:</span>
-<span class="sd">            cost_estim.append(Studieproject_one.fast_eps_cost(dim_real, B, C, D, F_0, F, eps)[0])</span>
+<span class="sd">            cost_estim.append(Smolyak_one.fast_eps_cost(dim_real, B, C, D, F_0, F, eps)[0])</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
@@ -833,7 +833,7 @@ $\displaystyle  $This coincides with the values diplayed on the pages 368 and 36
 
 <span class="sd">        for q in range(dim,dim+deg_approx):</span>
 <span class="sd">            print(str(r) + &quot;  &quot; +str(dim)+ &quot;   &quot; + str(q))</span>
-<span class="sd">            results_example_2[r-2,dim-2, q - dim, :] = Studieproject_one.controller_smolyak(functions[-1], variables[-1], option, q, example_2=True)</span>
+<span class="sd">            results_example_2[r-2,dim-2, q - dim, :] = Smolyak_one.controller_smolyak(functions[-1], variables[-1], option, q, example_2=True)</span>
 
 
 <span class="sd">results_example_2 = { &quot;results&quot;: results_example_2}</span>
