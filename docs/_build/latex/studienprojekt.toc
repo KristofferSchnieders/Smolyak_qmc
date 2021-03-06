@@ -1,0 +1,32 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Grid points}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}One point for q = 1}{1}{section.1.1}% 
+\contentsline {subsection}{\numberline {1.1.1}Here the grid points used for the approximation of the integral of a 2 dimensional function with the level of approximation q = 6 is shown, if one point is used for the one is used for probabilistic quadratures and q = 1. Apart form the upper left grid, the other grids change a little every time they are generated.}{4}{subsection.1.1.1}% 
+\contentsline {section}{\numberline {1.2}Three points for q = 1}{4}{section.1.2}% 
+\contentsline {chapter}{\numberline {2}Proof of principle}{7}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}One point for q = 1}{7}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Three points for q = 1.}{9}{section.2.2}% 
+\contentsline {section}{\numberline {2.3}Higher dimension}{12}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Approximation of constant}{12}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Approximation of simple analytical function}{13}{subsection.2.3.2}% 
+\contentsline {chapter}{\numberline {3}Approximate \(\pi \)}{19}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}The functions used}{19}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Illustration of the principle of approximation for 2 dimensions}{21}{section.3.2}% 
+\contentsline {chapter}{\numberline {4}Statistical evaluation for error for probabilistic quadratures}{25}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}First approximation of distribution}{25}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}One point for q = 1}{25}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Three points}{27}{subsection.4.1.2}% 
+\contentsline {section}{\numberline {4.2}Statistical parameters of distribution of results}{29}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Code used for generation of evaluated data.}{34}{subsection.4.2.1}% 
+\contentsline {chapter}{\numberline {5}Example 15.2.6: Periodic Functions (modified)}{35}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Example on page 358}{36}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Example 2: Functions in \(f \in \mathaccentV {tilde}07E{C}^r([0,1])\) with \(r > 0\) and higher dimensions}{39}{section.5.2}% 
+\contentsline {chapter}{\numberline {6}Example 15.3.8 Pertubated Coulomb Potential (PCP)}{43}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Results of approximations}{43}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Error estimation}{53}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Algorithm used for calculation of data}{54}{section.6.3}% 
+\contentsline {chapter}{\numberline {7}View}{57}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Overview over methods defined for project}{60}{section.7.1}% 
+\contentsline {chapter}{\numberline {8}Documentation}{63}{chapter.8}% 
+\contentsline {chapter}{Python Module Index}{73}{section*.25}% 
+\contentsline {chapter}{Index}{75}{section*.26}% 
