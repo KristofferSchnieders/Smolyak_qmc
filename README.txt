@@ -1,3 +1,6 @@
+[![Documentation Status](https://readthedocs.org/projects/smolyak-qmc/badge/?version=latest)](https://smolyak-qmc.readthedocs.io/en/latest/?badge=latest)
+
+
 Smolyak_qmc 
 
 This project was implemented to approximates the integral of multidimensional functions using the Smolyak algorithm. 

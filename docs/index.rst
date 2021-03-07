@@ -22,7 +22,7 @@ Welcome to Studienprojekt's documentation!
 Documentation
 ==================
 
-.. automodule:: Studienprojekt_Smolyak_qmc_one_point
+.. automodule:: Smolyak_one
       :members:
 
 .. * :ref:`genindex`
