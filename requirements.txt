@@ -7,3 +7,4 @@ qmcpy
 scipy
 matplotlib
 pandas
+tqdm
