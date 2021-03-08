@@ -1,3 +1,10 @@
 sphinx>=3
 ipykernel
 nbsphinx
+numpy
+sympy
+qmcpy
+scipy
+matplotlib
+pandas
+tkinter
